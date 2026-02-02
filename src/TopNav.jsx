@@ -10,7 +10,7 @@ const navItems = [
 
 export default function TopNav() {
   return (
-    <div className="rounded-3xl border border-white/10 bg-black/30 px-4 py-4 shadow-luxe backdrop-blur-md">
+    <nav className="card px-5 py-4" aria-label="Main">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="lux-pill">Ultra Miami Residence</div>
         <div className="flex flex-wrap items-center gap-2">
@@ -19,10 +19,10 @@ export default function TopNav() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
+                `rounded-full border px-4 py-2.5 text-xs font-medium uppercase tracking-[0.2em] transition-all duration-200 ${
                   isActive
-                    ? 'border-ultraBlue-400/80 bg-ultraBlue-500/20 text-white shadow-luxe'
-                    : 'border-white/20 bg-white/10 text-white/90 hover:border-ultraPink-300/60 hover:text-white'
+                    ? 'border-gold-500/50 bg-gold-500/15 text-gold-300 shadow-luxe-card'
+                    : 'border-white/15 bg-white/5 text-champagne-400/90 hover:border-gold-500/30 hover:text-champagne-300'
                 }`
               }
             >
@@ -31,6 +31,6 @@ export default function TopNav() {
           ))}
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

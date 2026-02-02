@@ -16,23 +16,23 @@ export default function SetTimesImage() {
     <div className="page-shell animate-fade">
       <div className="page-container text-center">
         <TopNav />
-        <div className="mb-4 flex justify-center">
+        <div className="mb-6 flex justify-center">
           <button className="ghost-button" onClick={() => navigate('/set-times')}>
-            ← Back to set times
+            Back to set times
           </button>
         </div>
-        <h1 className="page-title capitalize">{day} Set Times</h1>
-        <p className="page-subtitle">Latest schedule, optimized for mobile.</p>
+        <h1 className="page-title capitalize">{day}</h1>
+        <p className="page-subtitle">Latest schedule.</p>
         {imageSrc ? (
-          <div className="card mt-6 overflow-hidden">
+          <div className="card mt-8 overflow-hidden rounded-2xl">
             <img
               src={imageSrc}
               alt={`${day} set times`}
-              className="mx-auto w-full max-w-4xl rounded-2xl"
+              className="mx-auto w-full max-w-4xl"
             />
           </div>
         ) : (
-          <p className="mt-6 text-red-300">Set times not available for this day.</p>
+          <p className="mt-8 text-champagne-400/80">Set times not available for this day.</p>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ const days = [
   {
     label: 'Friday',
     date: 'March 27, 2026',
-    image: '/friday.jpg',
+    image: null,
     stages: [
       {
         name: 'Main Stage',
@@ -31,7 +31,7 @@ const days = [
   {
     label: 'Saturday',
     date: 'March 28, 2026',
-    image: '/saturday.jpg',
+    image: null,
     stages: [
       {
         name: 'Main Stage',
@@ -54,7 +54,7 @@ const days = [
   {
     label: 'Sunday',
     date: 'March 29, 2026',
-    image: '/sunday.jpg',
+    image: null,
     stages: [
       {
         name: 'Main Stage',
@@ -110,13 +110,15 @@ export default function SetTimes() {
                   <h2 className="font-display text-xl font-medium text-white">{day.label}</h2>
                   <p className="text-sm text-champagne-400/70">{day.date}</p>
                 </div>
-                <div className="overflow-hidden">
-                  <img
-                    src={day.image}
-                    alt={`${day.label} set times`}
-                    className="w-full object-cover"
-                  />
-                </div>
+                {day.image && (
+                  <div className="overflow-hidden">
+                    <img
+                      src={day.image}
+                      alt={`${day.label} set times`}
+                      className="w-full object-cover"
+                    />
+                  </div>
+                )}
                 <div className="px-6 py-6">
                   <div className="grid gap-5 sm:grid-cols-2">
                     {day.stages.map((stage) => (

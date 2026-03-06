@@ -1,13 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebase';
-import { doc, getDoc } from 'firebase/firestore';
 import TopNav from './TopNav';
 
 const FORM_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSf1Z0u5i2xEvnhxHcxgsK5i4OixJ9OEdm4gMrn3K9d0SD0b1A/formResponse';
 
-// TODO: Replace these placeholders with actual Google Form entry IDs.
 const ENTRY_IDS = {
   fullName: 'entry.2144589778',
   roomNumber: 'entry.474418241',
@@ -15,27 +12,12 @@ const ENTRY_IDS = {
 };
 
 export default function Dining({ guest }) {
-  const [firestoreGuest, setFirestoreGuest] = useState(null);
   const [restrictions, setRestrictions] = useState('');
   const [status, setStatus] = useState('idle');
   const [showToast, setShowToast] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchGuest() {
-      if (!guest?.key) return;
-      const docRef = doc(db, 'guests', guest.key);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setFirestoreGuest(docSnap.data());
-      } else {
-        setFirestoreGuest(null);
-      }
-    }
-    fetchGuest();
-  }, [guest]);
-
-  if (!firestoreGuest) {
+  if (!guest) {
     return (
       <div className="page-shell animate-fade">
         <div className="page-container text-center">
@@ -54,11 +36,11 @@ export default function Dining({ guest }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setStatus('submitting');
-    const buildingValue = firestoreGuest.building ? `Building ${firestoreGuest.building}` : '';
-    const unitValue = firestoreGuest.unit ? `Unit ${firestoreGuest.unit}` : '';
+    const buildingValue = guest.building ? `Building ${guest.building}` : '';
+    const unitValue = guest.unit ? `Unit ${guest.unit}` : '';
     const residenceValue = [buildingValue, unitValue].filter(Boolean).join(' · ');
     const payload = new URLSearchParams({
-      [ENTRY_IDS.fullName]: firestoreGuest.name || '',
+      [ENTRY_IDS.fullName]: guest.name || '',
       [ENTRY_IDS.roomNumber]: residenceValue,
       [ENTRY_IDS.dietaryRestrictions]: restrictions,
     });
@@ -123,7 +105,7 @@ export default function Dining({ guest }) {
                 Full name
               </label>
               <input
-                value={firestoreGuest.name || ''}
+                value={guest.name || ''}
                 readOnly
                 className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white"
               />
@@ -133,7 +115,7 @@ export default function Dining({ guest }) {
                 Building
               </label>
               <input
-                value={firestoreGuest.building || ''}
+                value={guest.building || ''}
                 readOnly
                 className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white"
               />
@@ -143,7 +125,7 @@ export default function Dining({ guest }) {
                 Unit
               </label>
               <input
-                value={firestoreGuest.unit || ''}
+                value={guest.unit || ''}
                 readOnly
                 className="mt-2 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white"
               />

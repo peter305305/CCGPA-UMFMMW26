@@ -4,7 +4,8 @@ const navItems = [
   { label: 'Lobby', to: '/dashboard' },
   { label: 'Residence', to: '/house-info' },
   { label: 'Dining', to: '/dining' },
-  { label: 'Set Times', to: '/set-times' },
+  { label: 'Penthouse', to: '/penthouse' },
+  { label: 'Ultra', to: '/set-times' },
   { label: 'Weather', to: '/weather' },
 ];
 

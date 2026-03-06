@@ -1,55 +1,13 @@
-import { useEffect, useState } from 'react';
 import TopNav from './TopNav';
 
-const images = [
-  "/gallery1.jpg",
-  "/gallery2.jpg",
-  "/gallery3.jpg"
-];
-
 export default function HouseInfo() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="page-shell animate-fade">
       <div className="page-container">
         <TopNav />
         <div className="mb-10 text-center">
           <h1 className="page-title">Residence</h1>
-          <p className="page-subtitle">Tap the address for directions; explore the gallery below.</p>
-        </div>
-
-        <div className="card mb-10 overflow-hidden">
-          <div className="relative">
-            <img
-              src={images[currentIndex]}
-              alt={`Gallery ${currentIndex + 1}`}
-              className="h-80 w-full object-cover transition-all duration-700"
-            />
-            <button
-              type="button"
-              onClick={() => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-lg text-white backdrop-blur-sm transition hover:bg-black/70 hover:border-gold-500/30"
-              aria-label="Previous image"
-            >
-              ←
-            </button>
-            <button
-              type="button"
-              onClick={() => setCurrentIndex((prev) => (prev + 1) % images.length)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-black/50 px-3 py-2 text-lg text-white backdrop-blur-sm transition hover:bg-black/70 hover:border-gold-500/30"
-              aria-label="Next image"
-            >
-              →
-            </button>
-          </div>
+          <p className="page-subtitle">Your home base for Miami Music Week.</p>
         </div>
 
         <div className="card mb-8 p-6 text-center">

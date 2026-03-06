@@ -1,29 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebase';
-import { doc, getDoc } from 'firebase/firestore';
 import TopNav from './TopNav';
 
 export default function GuestDashboard({ guest }) {
-  const [firestoreGuest, setFirestoreGuest] = useState(null);
   const [showServices, setShowServices] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchGuest() {
-      if (!guest?.key) return;
-      const docRef = doc(db, 'guests', guest.key);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setFirestoreGuest(docSnap.data());
-      } else {
-        setFirestoreGuest(null);
-      }
-    }
-    fetchGuest();
-  }, [guest]);
-
-  if (!firestoreGuest) {
+  if (!guest) {
     return (
       <div className="page-shell animate-fade">
         <div className="page-container text-center">
@@ -60,7 +43,7 @@ export default function GuestDashboard({ guest }) {
             <span className="chip">March 26–29, 2026</span>
           </div>
           <div>
-            <h1 className="page-title">Welcome, {firestoreGuest.name || 'Guest'}</h1>
+            <h1 className="page-title">Welcome, {guest.name || 'Guest'}</h1>
             <p className="page-subtitle">Your weekend essentials, curated in one place.</p>
           </div>
         </div>
@@ -79,7 +62,7 @@ export default function GuestDashboard({ guest }) {
           </div>
 
           <div className="card p-6">
-            <p className="card-header">Today’s Itinerary</p>
+            <p className="card-header">Today's Itinerary</p>
             <h2 className="card-title">Signature moments</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
@@ -112,10 +95,10 @@ export default function GuestDashboard({ guest }) {
             <p className="card-header">Your stay</p>
             <h2 className="card-title">Building & unit</h2>
             <p className="mt-3 text-sm text-champagne-400/80">
-              Building: {renderField(firestoreGuest.building)}<br />
-              Unit: {renderField(firestoreGuest.unit)}<br />
-              Arrival: {renderField(firestoreGuest.arrival)}<br />
-              Departure: {renderField(firestoreGuest.departure)}
+              Building: {renderField(guest.building)}<br />
+              Unit: {renderField(guest.unit)}<br />
+              Arrival: {renderField(guest.arrival)}<br />
+              Departure: {renderField(guest.departure)}
             </p>
           </div>
 
@@ -175,10 +158,17 @@ export default function GuestDashboard({ guest }) {
           </div>
 
           <div
-            className="card-interactive col-span-full flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
+            className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
+            onClick={() => navigate('/penthouse')}
+          >
+            Penthouse Night
+          </div>
+
+          <div
+            className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
             onClick={() => navigate('/set-times')}
           >
-            Set times
+            Ultra Set Times
           </div>
 
           <div

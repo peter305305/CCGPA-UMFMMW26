@@ -1,181 +1,199 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { db } from './firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import Papa from 'papaparse';
+import { supabase } from './supabase';
 import TopNav from './TopNav';
 
-export default function AdminDashboard({ guest }) {
-  const [firestoreGuest, setFirestoreGuest] = useState(null);
-  const [showServices, setShowServices] = useState(false);
+export default function AdminDashboard() {
+  const [guests, setGuests] = useState([]);
+  const [csvData, setCsvData] = useState([]);
+  const [csvFileName, setCsvFileName] = useState('');
+  const [uploadStatus, setUploadStatus] = useState('idle');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function fetchGuest() {
-      if (!guest?.key) return;
-      const docRef = doc(db, 'guests', guest.key);
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setFirestoreGuest(docSnap.data());
-      } else {
-        setFirestoreGuest(null);
-      }
-    }
-    fetchGuest();
-  }, [guest]);
+    fetchGuests();
+  }, []);
 
-  if (!firestoreGuest) {
-    return (
-      <div className="page-shell animate-fade">
-        <div className="page-container text-center">
-          <h1 className="page-title">Guest not found</h1>
-          <p className="page-subtitle">Please double-check the guest record or try again.</p>
-          <div className="mt-6 flex justify-center">
-            <button className="ghost-button" onClick={() => navigate('/')}>
-              Back to welcome
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+  async function fetchGuests() {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('guests')
+      .select('*')
+      .order('created_at', { ascending: false });
+    if (!error) setGuests(data || []);
+    setLoading(false);
+  }
+
+  function handleFileChange(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setCsvFileName(file.name);
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete(results) {
+        const rows = results.data.map((row) => {
+          const first = (row.first_name || row.firstName || '').trim();
+          const last = (row.last_name || row.lastName || '').trim();
+          const fullName = (row.name || row.Name || '').trim();
+          let firstName = first;
+          let lastName = last;
+          let name = fullName;
+          if (!firstName && name) {
+            const parts = name.split(/\s+/);
+            firstName = parts[0] || '';
+            lastName = parts.slice(1).join(' ') || '';
+          }
+          if (!name && firstName) {
+            name = [firstName, lastName].filter(Boolean).join(' ');
+          }
+          return {
+            name,
+            first_name: firstName,
+            last_name: lastName,
+            building: (row.building || row.Building || '').trim(),
+            unit: (row.unit || row.Unit || '').trim(),
+            arrival: (row.arrival || row.Arrival || '').trim(),
+            departure: (row.departure || row.Departure || '').trim(),
+          };
+        });
+        setCsvData(rows.filter((r) => r.name));
+      },
+    });
+  }
+
+  async function handleUpload() {
+    if (!csvData.length) return;
+    setUploadStatus('uploading');
+    const { error } = await supabase.from('guests').insert(csvData);
+    if (error) {
+      setUploadStatus('error');
+    } else {
+      setUploadStatus('success');
+      setCsvData([]);
+      setCsvFileName('');
+      fetchGuests();
+    }
+  }
+
+  async function handleClearGuests() {
+    if (!window.confirm('Clear all guests? This cannot be undone.')) return;
+    const { error } = await supabase.from('guests').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+    if (!error) {
+      setGuests([]);
+    }
   }
 
   return (
     <div className="page-shell animate-fade">
       <div className="page-container">
         <TopNav />
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
-          <img
-            src="/ultra-hero.svg"
-            alt="Ultra Miami skyline"
-            className="h-56 w-full object-cover sm:h-72"
-          />
-        </div>
-        <div className="mb-12 flex flex-col gap-5">
-          <div className="flex flex-wrap items-center gap-3">
+        <div className="mb-10">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
             <span className="chip">Admin</span>
-            <span className="chip">March 26–29, 2026</span>
           </div>
-          <div>
-            <h1 className="page-title">Welcome, {firestoreGuest.name}</h1>
-            <p className="page-subtitle">Guest operations and residence support.</p>
-          </div>
+          <h1 className="page-title">Admin Dashboard</h1>
+          <p className="page-subtitle">Manage guest list via CSV upload.</p>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
-          <div className="card p-6">
-            <p className="card-header">Concierge</p>
-            <h2 className="card-title">White-glove support</h2>
-            <p className="mt-3 text-sm text-champagne-400/80">
-              Status: <span className="text-gold-400">Online</span> · Response within 5 minutes
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a className="cta-button" href="sms:+447846763369">Message Concierge</a>
-              <a className="ghost-button" href="sms:+17865255271">Technical Support</a>
-            </div>
+        {/* CSV Upload */}
+        <div className="card p-6 mb-8">
+          <p className="card-header">Import</p>
+          <h2 className="card-title">Upload guest CSV</h2>
+          <p className="mt-2 text-sm text-champagne-400/80">
+            CSV should have columns: <code className="text-gold-400">name</code> (or <code className="text-gold-400">first_name</code> + <code className="text-gold-400">last_name</code>), <code className="text-gold-400">building</code>, <code className="text-gold-400">unit</code>, <code className="text-gold-400">arrival</code>, <code className="text-gold-400">departure</code>
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <label className="ghost-button cursor-pointer">
+              Choose file
+              <input type="file" accept=".csv" className="hidden" onChange={handleFileChange} />
+            </label>
+            {csvFileName && <span className="text-sm text-champagne-400/80">{csvFileName}</span>}
           </div>
 
-          <div className="card p-6">
-            <p className="card-header">Operations</p>
-            <h2 className="card-title">Service windows</h2>
-            <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
-              <div>
-                <p className="font-semibold text-white">Cleaning</p>
-                <p>3:00 PM – 7:00 PM daily</p>
+          {csvData.length > 0 && (
+            <>
+              <div className="mt-6 overflow-x-auto rounded-xl border border-white/10">
+                <table className="w-full text-sm text-left">
+                  <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-champagne-400/60">
+                    <tr>
+                      <th className="px-4 py-3">Name</th>
+                      <th className="px-4 py-3">Building</th>
+                      <th className="px-4 py-3">Unit</th>
+                      <th className="px-4 py-3">Arrival</th>
+                      <th className="px-4 py-3">Departure</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-champagne-400/80">
+                    {csvData.map((row, i) => (
+                      <tr key={i} className="border-b border-white/5">
+                        <td className="px-4 py-2 text-white">{row.name}</td>
+                        <td className="px-4 py-2">{row.building}</td>
+                        <td className="px-4 py-2">{row.unit}</td>
+                        <td className="px-4 py-2">{row.arrival}</td>
+                        <td className="px-4 py-2">{row.departure}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="lux-divider" />
-              <div>
-                <p className="font-semibold text-white">Brunch</p>
-                <p>10:00 AM – 1:00 PM</p>
+              <div className="mt-4 flex flex-wrap items-center gap-3">
+                <button className="cta-button" onClick={handleUpload} disabled={uploadStatus === 'uploading'}>
+                  {uploadStatus === 'uploading' ? 'Uploading…' : `Upload ${csvData.length} guests`}
+                </button>
+                {uploadStatus === 'success' && <span className="text-sm text-gold-400">Uploaded successfully.</span>}
+                {uploadStatus === 'error' && <span className="text-sm text-red-400">Upload failed. Check console.</span>}
               </div>
-              <div className="lux-divider" />
-              <div>
-                <p className="font-semibold text-white">Late-night</p>
-                <p>1:00 AM – 3:00 AM</p>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <div
-            className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
-            onClick={() => navigate('/house-info')}
-          >
-            Residence
-          </div>
-
-          <div className="card p-5">
-            <p className="card-header">Your stay</p>
-            <h2 className="card-title">Building & unit</h2>
-            <p className="mt-3 text-sm text-champagne-400/80">
-              Building: {firestoreGuest.building}<br />
-              Unit: {firestoreGuest.unit}<br />
-              Arrival: {firestoreGuest.arrival}<br />
-              Departure: {firestoreGuest.departure}
-            </p>
-          </div>
-
-          <div
-            className="card-interactive flex cursor-pointer flex-col items-center justify-center p-5 text-center"
-            onClick={() => setShowServices(!showServices)}
-          >
-            <p className="card-header">On-demand</p>
-            <h2 className="card-title">Services</h2>
-            {showServices && (
-              <div className="mt-4 space-y-2 text-sm text-champagne-400/80">
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3">Laundry – TBD</div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  Cleaning · 3 PM – 7 PM daily<br />(Leave unit door unlocked during this window)
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  <a href="sms:+447846763369" className="text-gold-400 hover:underline">Another request</a>
-                </div>
-                <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  <a href="sms:+17865255271" className="text-gold-400 hover:underline">Technical support</a>
-                </div>
-              </div>
+        {/* Guest List */}
+        <div className="card p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+            <div>
+              <p className="card-header">Database</p>
+              <h2 className="card-title">Current guests ({guests.length})</h2>
+            </div>
+            {guests.length > 0 && (
+              <button className="ghost-button text-xs" onClick={handleClearGuests}>
+                Clear all
+              </button>
             )}
           </div>
 
-          <div
-            className="card-interactive cursor-pointer p-5"
-            onClick={() => navigate('/dining')}
-          >
-            <p className="card-header">Dining</p>
-            <h2 className="card-title">Food & beverage</h2>
-            <p className="mt-3 text-sm text-champagne-400/80">
-              Brunch: 10 AM – 1 PM · Late-night: 1–3 AM
-            </p>
-          </div>
-
-          <div className="card p-5">
-            <p className="card-header">Transport</p>
-            <h2 className="card-title">Getting around</h2>
-            <p className="mt-3 text-sm text-champagne-400/80">
-              Party Bus: 3 PM<br />
-              Private car: <a href="sms:+16452219584" className="text-gold-400 hover:underline">Request 1hr ahead</a>
-            </p>
-          </div>
-
-          <div className="card p-5">
-            <p className="card-header">Forecast</p>
-            <h2 className="card-title">Miami weather</h2>
-            <a
-              href="https://weather.com/weather/tenday/l/33139"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex text-sm font-medium text-gold-400 hover:underline"
-            >
-              View forecast
-            </a>
-          </div>
-
-          <div
-            className="card-interactive col-span-full flex h-28 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
-            onClick={() => window.location.href = "sms:+447846763369"}
-          >
-            Request something else
-          </div>
+          {loading ? (
+            <p className="text-sm text-champagne-400/60">Loading…</p>
+          ) : guests.length === 0 ? (
+            <p className="text-sm text-champagne-400/60">No guests yet. Upload a CSV above.</p>
+          ) : (
+            <div className="overflow-x-auto rounded-xl border border-white/10">
+              <table className="w-full text-sm text-left">
+                <thead className="border-b border-white/10 bg-white/[0.03] text-xs uppercase tracking-wider text-champagne-400/60">
+                  <tr>
+                    <th className="px-4 py-3">Name</th>
+                    <th className="px-4 py-3">Building</th>
+                    <th className="px-4 py-3">Unit</th>
+                    <th className="px-4 py-3">Arrival</th>
+                    <th className="px-4 py-3">Departure</th>
+                  </tr>
+                </thead>
+                <tbody className="text-champagne-400/80">
+                  {guests.map((g) => (
+                    <tr key={g.id} className="border-b border-white/5">
+                      <td className="px-4 py-2 text-white">{g.name}</td>
+                      <td className="px-4 py-2">{g.building}</td>
+                      <td className="px-4 py-2">{g.unit}</td>
+                      <td className="px-4 py-2">{g.arrival}</td>
+                      <td className="px-4 py-2">{g.departure}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>

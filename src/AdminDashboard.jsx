@@ -10,6 +10,9 @@ export default function AdminDashboard() {
   const [csvFileName, setCsvFileName] = useState('');
   const [uploadStatus, setUploadStatus] = useState('idle');
   const [loading, setLoading] = useState(true);
+  const [editingId, setEditingId] = useState(null);
+  const [editRow, setEditRow] = useState({});
+  const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,6 +88,57 @@ export default function AdminDashboard() {
       setGuests([]);
     }
   }
+
+  function startEdit(guest) {
+    setEditingId(guest.id);
+    setEditRow({
+      name: guest.name || '',
+      first_name: guest.first_name || '',
+      last_name: guest.last_name || '',
+      building: guest.building || '',
+      unit: guest.unit || '',
+      arrival: guest.arrival || '',
+      departure: guest.departure || '',
+    });
+  }
+
+  function cancelEdit() {
+    setEditingId(null);
+    setEditRow({});
+  }
+
+  async function saveEdit(id) {
+    setSaving(true);
+    const parts = editRow.name.trim().split(/\s+/);
+    const updates = {
+      ...editRow,
+      first_name: editRow.first_name || parts[0] || '',
+      last_name: editRow.last_name || parts.slice(1).join(' ') || '',
+    };
+    const { error } = await supabase.from('guests').update(updates).eq('id', id);
+    setSaving(false);
+    if (!error) {
+      setEditingId(null);
+      setEditRow({});
+      fetchGuests();
+    }
+  }
+
+  async function deleteGuest(id, name) {
+    if (!window.confirm(`Delete ${name}?`)) return;
+    const { error } = await supabase.from('guests').delete().eq('id', id);
+    if (!error) {
+      setGuests((prev) => prev.filter((g) => g.id !== id));
+    }
+  }
+
+  const editField = (field) => (
+    <input
+      value={editRow[field]}
+      onChange={(e) => setEditRow({ ...editRow, [field]: e.target.value })}
+      className="w-full rounded-lg border border-white/15 bg-white/5 px-2 py-1.5 text-sm text-white focus:border-gold-500/50 focus:outline-none focus:ring-1 focus:ring-gold-500/30"
+    />
+  );
 
   return (
     <div className="page-shell animate-fade">
@@ -178,16 +232,58 @@ export default function AdminDashboard() {
                     <th className="px-4 py-3">Unit</th>
                     <th className="px-4 py-3">Arrival</th>
                     <th className="px-4 py-3">Departure</th>
+                    <th className="px-4 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="text-champagne-400/80">
                   {guests.map((g) => (
                     <tr key={g.id} className="border-b border-white/5">
-                      <td className="px-4 py-2 text-white">{g.name}</td>
-                      <td className="px-4 py-2">{g.building}</td>
-                      <td className="px-4 py-2">{g.unit}</td>
-                      <td className="px-4 py-2">{g.arrival}</td>
-                      <td className="px-4 py-2">{g.departure}</td>
+                      {editingId === g.id ? (
+                        <>
+                          <td className="px-3 py-2">{editField('name')}</td>
+                          <td className="px-3 py-2">{editField('building')}</td>
+                          <td className="px-3 py-2">{editField('unit')}</td>
+                          <td className="px-3 py-2">{editField('arrival')}</td>
+                          <td className="px-3 py-2">{editField('departure')}</td>
+                          <td className="px-3 py-2 text-right whitespace-nowrap">
+                            <button
+                              onClick={() => saveEdit(g.id)}
+                              disabled={saving}
+                              className="text-xs font-medium text-gold-400 hover:underline mr-3"
+                            >
+                              {saving ? 'Saving…' : 'Save'}
+                            </button>
+                            <button
+                              onClick={cancelEdit}
+                              className="text-xs font-medium text-champagne-400/60 hover:underline"
+                            >
+                              Cancel
+                            </button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="px-4 py-2 text-white">{g.name}</td>
+                          <td className="px-4 py-2">{g.building}</td>
+                          <td className="px-4 py-2">{g.unit}</td>
+                          <td className="px-4 py-2">{g.arrival}</td>
+                          <td className="px-4 py-2">{g.departure}</td>
+                          <td className="px-4 py-2 text-right whitespace-nowrap">
+                            <button
+                              onClick={() => startEdit(g)}
+                              className="text-xs font-medium text-gold-400 hover:underline mr-3"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => deleteGuest(g.id, g.name)}
+                              className="text-xs font-medium text-red-400/70 hover:underline"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </>
+                      )}
                     </tr>
                   ))}
                 </tbody>

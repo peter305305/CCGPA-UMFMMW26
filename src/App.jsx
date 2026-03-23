@@ -76,11 +76,11 @@ function Landing({ setUser, setIsAdmin }) {
               Your private concierge hub for Miami Music Week and Ultra.
             </p>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card bg-black">
+          <div className="overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
             <img
               src="/ultra-hero.png"
               alt="Ultra Miami skyline"
-              className="w-full h-44 sm:h-56 object-cover object-top"
+              className="w-full h-auto block"
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-stretch">

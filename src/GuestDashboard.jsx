@@ -30,11 +30,11 @@ export default function GuestDashboard({ guest }) {
     <div className="page-shell animate-fade">
       <div className="page-container">
         <TopNav />
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card bg-black">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
           <img
             src="/ultra-hero.png"
             alt="Ultra Miami skyline"
-            className="w-full h-48 sm:h-64 object-cover object-top"
+            className="w-full h-auto block"
           />
         </div>
         <div className="mb-12 flex flex-col gap-5">

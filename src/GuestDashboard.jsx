@@ -6,6 +6,11 @@ export default function GuestDashboard({ guest }) {
   const [showServices, setShowServices] = useState(false);
   const navigate = useNavigate();
 
+  const now = new Date();
+  const eastern = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+  const hour = eastern.getHours();
+  const isOnline = hour >= 9 || hour < 1;
+
   if (!guest) {
     return (
       <div className="page-shell animate-fade">
@@ -53,7 +58,7 @@ export default function GuestDashboard({ guest }) {
             <p className="card-header">Concierge</p>
             <h2 className="card-title">Dedicated support</h2>
             <p className="mt-3 text-sm text-champagne-400/80">
-              Status: <span className="text-gold-400">Online</span> · Response within 5 minutes
+              Status: {isOnline ? <span className="text-gold-400">Online</span> : <span className="text-champagne-400/60">Offline</span>} · {isOnline ? 'Response within 5 minutes' : 'Available 9 AM – 1 AM ET'}
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a className="cta-button" href={`sms:+17864174744?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`}>Message Concierge</a>

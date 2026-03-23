@@ -34,7 +34,7 @@ export default function GuestDashboard({ guest }) {
           <img
             src="/ultra-hero.png"
             alt="Ultra Miami skyline"
-            className="h-56 w-full object-cover sm:h-72"
+            className="w-full h-auto"
           />
         </div>
         <div className="mb-12 flex flex-col gap-5">

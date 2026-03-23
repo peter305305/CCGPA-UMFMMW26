@@ -80,7 +80,7 @@ function Landing({ setUser, setIsAdmin }) {
             <img
               src="/ultra-hero.png"
               alt="Ultra Miami skyline"
-              className="h-52 w-full object-cover sm:h-64"
+              className="w-full h-auto"
             />
           </div>
           <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-stretch">

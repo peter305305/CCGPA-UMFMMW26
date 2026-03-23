@@ -78,7 +78,7 @@ function Landing({ setUser, setIsAdmin }) {
           </div>
           <div className="overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
             <img
-              src="/ultra-hero.svg"
+              src="/ultra-hero.png"
               alt="Ultra Miami skyline"
               className="h-52 w-full object-cover sm:h-64"
             />

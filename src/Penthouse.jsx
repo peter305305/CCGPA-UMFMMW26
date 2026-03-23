@@ -81,7 +81,7 @@ export default function Penthouse({ guest }) {
         </div>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a className="cta-button" href="sms:+447846763369">
+          <a className="cta-button" href={`sms:+17864174744?body=${encodeURIComponent(`${guest?.name || ''} - Unit ${guest?.unit || ''}: `)}`}>
             Message Concierge
           </a>
           <button className="ghost-button" onClick={() => navigate('/dashboard')}>

@@ -32,7 +32,7 @@ export default function GuestDashboard({ guest }) {
         <TopNav />
         <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
           <img
-            src="/ultra-hero.svg"
+            src="/ultra-hero.png"
             alt="Ultra Miami skyline"
             className="h-56 w-full object-cover sm:h-72"
           />
@@ -56,8 +56,8 @@ export default function GuestDashboard({ guest }) {
               Status: <span className="text-gold-400">Online</span> · Response within 5 minutes
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a className="cta-button" href="sms:+17864174744">Message Concierge</a>
-              <a className="ghost-button" href="sms:+17865255271">Technical Support</a>
+              <a className="cta-button" href={`sms:+17864174744?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`}>Message Concierge</a>
+              <a className="ghost-button" href={`sms:+17865255271?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`}>Technical Support</a>
             </div>
           </div>
 
@@ -115,10 +115,10 @@ export default function GuestDashboard({ guest }) {
                   Cleaning · 3 PM – 7 PM daily<br />(Leave unit door unlocked during this window)
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  <a href="sms:+17864174744" className="text-gold-400 hover:underline">Another request</a>
+                  <a href={`sms:+17864174744?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`} className="text-gold-400 hover:underline">Another request</a>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  <a href="sms:+17865255271" className="text-gold-400 hover:underline">Technical support</a>
+                  <a href={`sms:+17865255271?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`} className="text-gold-400 hover:underline">Technical support</a>
                 </div>
               </div>
             )}
@@ -177,7 +177,7 @@ export default function GuestDashboard({ guest }) {
 
           <div
             className="card-interactive col-span-full flex h-28 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
-            onClick={() => window.location.href = "sms:+17864174744"}
+            onClick={() => window.location.href = `sms:+17864174744?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`}
           >
             Request something else
           </div>

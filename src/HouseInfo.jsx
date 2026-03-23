@@ -21,25 +21,13 @@ export default function HouseInfo() {
           </a>
         </div>
 
-        <div className="mb-10 grid gap-5 sm:grid-cols-2">
-          <div className="card p-6">
-            <p className="card-header">Amenities</p>
-            <h2 className="card-title">Curated for comfort</h2>
-            <ul className="mt-4 space-y-2 text-sm text-champagne-400/80">
-              <li>Tennis court · Canoes · Paddleboarding</li>
-              <li>Pool · Beach volleyball · Pickleball</li>
-              <li>Movie theater · Indoor spa · Sauna</li>
-              <li>Billiards · Air hockey · Ping pong · Foosball</li>
-            </ul>
-          </div>
-
+        <div className="mb-10 grid gap-5">
           <div className="card p-6">
             <p className="card-header">House notes</p>
             <h2 className="card-title">Quiet luxury</h2>
             <ul className="mt-4 space-y-2 text-sm text-champagne-400/80">
-              <li>Quiet hours: 2:00 AM – 8:00 AM</li>
-              <li>Pool closes at 2:00 AM</li>
-              <li>Keep doors locked when leaving</li>
+              <li>Quiet hours: 2:00 AM – 10:00 AM</li>
+              <li>Keep doors unlocked when leaving</li>
               <li>Concierge handles all requests</li>
             </ul>
           </div>

@@ -56,7 +56,7 @@ export default function GuestDashboard({ guest }) {
               Status: <span className="text-gold-400">Online</span> · Response within 5 minutes
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a className="cta-button" href="sms:+447846763369">Message Concierge</a>
+              <a className="cta-button" href="sms:+17864174744">Message Concierge</a>
               <a className="ghost-button" href="sms:+17865255271">Technical Support</a>
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function GuestDashboard({ guest }) {
                   Cleaning · 3 PM – 7 PM daily<br />(Leave unit door unlocked during this window)
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-                  <a href="sms:+447846763369" className="text-gold-400 hover:underline">Another request</a>
+                  <a href="sms:+17864174744" className="text-gold-400 hover:underline">Another request</a>
                 </div>
                 <div className="rounded-xl border border-white/10 bg-white/5 p-3">
                   <a href="sms:+17865255271" className="text-gold-400 hover:underline">Technical support</a>
@@ -136,15 +136,6 @@ export default function GuestDashboard({ guest }) {
           </div>
 
           <div className="card p-5">
-            <p className="card-header">Transport</p>
-            <h2 className="card-title">Getting around</h2>
-            <p className="mt-3 text-sm text-champagne-400/80">
-              Party Bus: 3 PM<br />
-              Private car: <a href="sms:+16452219584" className="text-gold-400 hover:underline">Request 1hr ahead</a>
-            </p>
-          </div>
-
-          <div className="card p-5">
             <p className="card-header">Forecast</p>
             <h2 className="card-title">Miami weather</h2>
             <a
@@ -157,11 +148,24 @@ export default function GuestDashboard({ guest }) {
             </a>
           </div>
 
+          <div className="card p-5">
+            <p className="card-header">Wifi</p>
+            <h2 className="card-title">Connect to network</h2>
+            <div className="mt-3 space-y-2 text-sm text-champagne-400/80">
+              <p>
+                SSID: <span className="font-semibold text-white">XCVR</span>
+              </p>
+              <p>
+                Password: <span className="font-mono font-semibold text-white">lazpmu8q</span>
+              </p>
+            </div>
+          </div>
+
           <div
             className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
             onClick={() => navigate('/penthouse')}
           >
-            Penthouse Night
+            Sunset Session
           </div>
 
           <div
@@ -173,7 +177,7 @@ export default function GuestDashboard({ guest }) {
 
           <div
             className="card-interactive col-span-full flex h-28 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
-            onClick={() => window.location.href = "sms:+447846763369"}
+            onClick={() => window.location.href = "sms:+17864174744"}
           >
             Request something else
           </div>

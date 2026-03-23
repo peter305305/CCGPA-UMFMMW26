@@ -13,7 +13,7 @@ export default function Penthouse({ guest }) {
             Private Event
             <span className="h-1.5 w-1.5 rounded-full bg-ultraPink-400 animate-pulse" aria-hidden />
           </div>
-          <h1 className="page-title">Penthouse Night</h1>
+          <h1 className="page-title">Sunset Session</h1>
           <p className="page-subtitle">Thursday, March 26, 2026</p>
         </div>
 
@@ -23,18 +23,18 @@ export default function Penthouse({ guest }) {
             <h2 className="card-title">Event timing</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
-                <p className="font-semibold text-white">8:00 PM</p>
-                <p>Doors open · Welcome cocktails</p>
+                <p className="font-semibold text-white">6:00 PM</p>
+                <p>Doors open</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">9:00 PM – 2:00 AM</p>
-                <p>Main event · Live entertainment</p>
+                <p className="font-semibold text-white">6:00 PM – 12:00 AM</p>
+                <p>Main event</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">2:00 AM</p>
-                <p>Last call</p>
+                <p className="font-semibold text-white">12:00 AM</p>
+                <p>Event ends</p>
               </div>
             </div>
           </div>

@@ -71,26 +71,6 @@ export default function Dining({ guest }) {
           <p className="page-subtitle">Weekend dining, curated for your stay.</p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div className="card p-6">
-            <p className="card-header">Dinner</p>
-            <h2 className="card-title">Signature entrees</h2>
-            <ul className="mt-4 space-y-2 text-sm text-champagne-400/80">
-              <li>Seared salmon, citrus beurre blanc</li>
-              <li>Filet mignon, truffle demi-glace</li>
-              <li>Wild mushroom risotto</li>
-              <li>Heirloom salad, champagne vinaigrette</li>
-            </ul>
-          </div>
-
-          <div className="card p-6">
-            <p className="card-header">Late night</p>
-            <h2 className="card-title">Finger foods</h2>
-            <ul className="mt-4 space-y-2 text-sm text-champagne-400/80">
-              <li>Sliders · Pizza · Quesadillas · Fries</li>
-            </ul>
-          </div>
-        </div>
 
         <div className="mt-10 card p-6">
           <p className="card-header">Dietary</p>

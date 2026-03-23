@@ -96,9 +96,7 @@ export default function GuestDashboard({ guest }) {
             <h2 className="card-title">Building & unit</h2>
             <p className="mt-3 text-sm text-champagne-400/80">
               Building: {renderField(guest.building)}<br />
-              Unit: {renderField(guest.unit)}<br />
-              Arrival: {renderField(guest.arrival)}<br />
-              Departure: {renderField(guest.departure)}
+              Unit: {renderField(guest.unit)}
             </p>
           </div>
 

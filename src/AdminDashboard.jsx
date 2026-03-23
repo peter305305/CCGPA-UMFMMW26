@@ -58,8 +58,6 @@ export default function AdminDashboard() {
             last_name: lastName,
             building: (row.building || row.Building || '').trim(),
             unit: (row.unit || row.Unit || '').trim(),
-            arrival: (row.arrival || row.Arrival || '').trim(),
-            departure: (row.departure || row.Departure || '').trim(),
           };
         });
         setCsvData(rows.filter((r) => r.name));
@@ -97,8 +95,6 @@ export default function AdminDashboard() {
       last_name: guest.last_name || '',
       building: guest.building || '',
       unit: guest.unit || '',
-      arrival: guest.arrival || '',
-      departure: guest.departure || '',
     });
   }
 
@@ -157,7 +153,7 @@ export default function AdminDashboard() {
           <p className="card-header">Import</p>
           <h2 className="card-title">Upload guest CSV</h2>
           <p className="mt-2 text-sm text-champagne-400/80">
-            CSV should have columns: <code className="text-gold-400">name</code> (or <code className="text-gold-400">first_name</code> + <code className="text-gold-400">last_name</code>), <code className="text-gold-400">building</code>, <code className="text-gold-400">unit</code>, <code className="text-gold-400">arrival</code>, <code className="text-gold-400">departure</code>
+            CSV should have columns: <code className="text-gold-400">name</code> (or <code className="text-gold-400">first_name</code> + <code className="text-gold-400">last_name</code>), <code className="text-gold-400">building</code>, <code className="text-gold-400">unit</code>
           </p>
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <label className="ghost-button cursor-pointer">
@@ -176,8 +172,6 @@ export default function AdminDashboard() {
                       <th className="px-4 py-3">Name</th>
                       <th className="px-4 py-3">Building</th>
                       <th className="px-4 py-3">Unit</th>
-                      <th className="px-4 py-3">Arrival</th>
-                      <th className="px-4 py-3">Departure</th>
                     </tr>
                   </thead>
                   <tbody className="text-champagne-400/80">
@@ -186,8 +180,6 @@ export default function AdminDashboard() {
                         <td className="px-4 py-2 text-white">{row.name}</td>
                         <td className="px-4 py-2">{row.building}</td>
                         <td className="px-4 py-2">{row.unit}</td>
-                        <td className="px-4 py-2">{row.arrival}</td>
-                        <td className="px-4 py-2">{row.departure}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -230,8 +222,6 @@ export default function AdminDashboard() {
                     <th className="px-4 py-3">Name</th>
                     <th className="px-4 py-3">Building</th>
                     <th className="px-4 py-3">Unit</th>
-                    <th className="px-4 py-3">Arrival</th>
-                    <th className="px-4 py-3">Departure</th>
                     <th className="px-4 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
@@ -243,8 +233,6 @@ export default function AdminDashboard() {
                           <td className="px-3 py-2">{editField('name')}</td>
                           <td className="px-3 py-2">{editField('building')}</td>
                           <td className="px-3 py-2">{editField('unit')}</td>
-                          <td className="px-3 py-2">{editField('arrival')}</td>
-                          <td className="px-3 py-2">{editField('departure')}</td>
                           <td className="px-3 py-2 text-right whitespace-nowrap">
                             <button
                               onClick={() => saveEdit(g.id)}
@@ -266,8 +254,6 @@ export default function AdminDashboard() {
                           <td className="px-4 py-2 text-white">{g.name}</td>
                           <td className="px-4 py-2">{g.building}</td>
                           <td className="px-4 py-2">{g.unit}</td>
-                          <td className="px-4 py-2">{g.arrival}</td>
-                          <td className="px-4 py-2">{g.departure}</td>
                           <td className="px-4 py-2 text-right whitespace-nowrap">
                             <button
                               onClick={() => startEdit(g)}

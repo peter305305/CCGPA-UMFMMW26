@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const navItems = [
   { label: 'Lobby', to: '/dashboard' },
   { label: 'Residence', to: '/house-info' },
-  { label: 'Dining', to: '/dining' },
+  // { label: 'Dining', to: '/dining' }, // HIDDEN — bring back later this week
   { label: 'Penthouse', to: '/penthouse' },
   { label: 'Ultra', to: '/set-times' },
   { label: 'Weather', to: '/weather' },

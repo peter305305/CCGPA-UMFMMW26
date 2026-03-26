@@ -66,6 +66,7 @@ export default function GuestDashboard({ guest }) {
             </div>
           </div>
 
+          {/* HIDDEN — bring back later this week
           <div className="card p-6">
             <p className="card-header">Today's Itinerary</p>
             <h2 className="card-title">Signature moments</h2>
@@ -86,6 +87,7 @@ export default function GuestDashboard({ guest }) {
               </div>
             </div>
           </div>
+          */}
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -127,6 +129,7 @@ export default function GuestDashboard({ guest }) {
             )}
           </div>
 
+          {/* HIDDEN — bring back later this week
           <div
             className="card-interactive cursor-pointer p-5"
             onClick={() => navigate('/dining')}
@@ -137,6 +140,7 @@ export default function GuestDashboard({ guest }) {
               Brunch: 10 AM – 1 PM · Late-night: 1–3 AM
             </p>
           </div>
+          */}
 
           <div className="card p-5">
             <p className="card-header">Forecast</p>

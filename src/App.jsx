@@ -143,7 +143,7 @@ export default function App() {
         <Route path="/house-info" element={<HouseInfo />} />
         <Route path="/set-times" element={<SetTimes />} />
         <Route path="/penthouse" element={<Penthouse guest={user} />} />
-        <Route path="/dining" element={<Dining guest={user} />} />
+        {/* <Route path="/dining" element={<Dining guest={user} />} /> */}{/* HIDDEN — bring back later this week */}
       </Routes>
     </Router>
   );

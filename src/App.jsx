@@ -84,6 +84,7 @@ function Landing({ setUser, setIsAdmin }) {
               className="w-full h-auto block"
             />
           </div>
+          <p className="text-sm font-medium text-champagne-400/80">Staying at the Bentley Bay?</p>
           <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-stretch">
             <input
               value={input}

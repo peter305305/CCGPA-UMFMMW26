@@ -66,7 +66,7 @@ export default function GuestDashboard({ guest }) {
             </div>
           </div>
 
-          <div className="card p-6">
+          <div className="card-interactive cursor-pointer p-6" onClick={() => navigate('/penthouse')}>
             <p className="card-header">Today's Itinerary</p>
             <h2 className="card-title">Thursday, March 26</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
@@ -90,6 +90,7 @@ export default function GuestDashboard({ guest }) {
                 <p>After party</p>
               </div>
             </div>
+            <p className="mt-4 text-sm font-medium text-gold-400">Click here for more info</p>
           </div>
         </div>
 

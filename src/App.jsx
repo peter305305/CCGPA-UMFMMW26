@@ -8,6 +8,7 @@ import HouseInfo from './HouseInfo';
 import SetTimes from './SetTimes';
 import Penthouse from './Penthouse';
 import Dining from './Dining';
+import PhotoUpload from './PhotoUpload';
 
 function Landing({ setUser, setIsAdmin }) {
   const [input, setInput] = useState('');
@@ -118,18 +119,16 @@ function Landing({ setUser, setIsAdmin }) {
             </div>
           )}
 
-          <a
-            href="https://drive.google.com/drive/folders/1Bx0caDmZuQ1yjOh8o3XXhJz9RWlI42CU?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             className="card-interactive flex cursor-pointer items-center justify-center rounded-2xl p-5 text-center"
+            onClick={() => navigate('/photos')}
           >
             <div>
               <p className="card-header">Photos</p>
               <h2 className="card-title">Share Your Pictures</h2>
               <p className="mt-2 text-sm text-champagne-400/80">Upload your best moments from the weekend</p>
             </div>
-          </a>
+          </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="chip">Concierge</span>
@@ -156,6 +155,7 @@ export default function App() {
         <Route path="/house-info" element={<HouseInfo />} />
         <Route path="/set-times" element={<SetTimes />} />
         <Route path="/penthouse" element={<Penthouse guest={user} />} />
+        <Route path="/photos" element={<PhotoUpload guest={user} />} />
         {/* <Route path="/dining" element={<Dining guest={user} />} /> */}{/* HIDDEN — bring back later this week */}
       </Routes>
     </Router>

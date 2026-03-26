@@ -186,14 +186,12 @@ export default function GuestDashboard({ guest }) {
             Ultra Set Times
           </div>
 
-          <a
-            href="https://drive.google.com/drive/folders/1Bx0caDmZuQ1yjOh8o3XXhJz9RWlI42CU?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
+            onClick={() => navigate('/photos')}
           >
             Share Your Pictures
-          </a>
+          </div>
 
           <div
             className="card-interactive col-span-full flex h-28 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"

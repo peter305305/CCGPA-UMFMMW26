@@ -118,6 +118,19 @@ function Landing({ setUser, setIsAdmin }) {
             </div>
           )}
 
+          <a
+            href="https://drive.google.com/drive/folders/1Bx0caDmZuQ1yjOh8o3XXhJz9RWlI42CU?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-interactive flex cursor-pointer items-center justify-center rounded-2xl p-5 text-center"
+          >
+            <div>
+              <p className="card-header">Photos</p>
+              <h2 className="card-title">Share Your Pictures</h2>
+              <p className="mt-2 text-sm text-champagne-400/80">Upload your best moments from the weekend</p>
+            </div>
+          </a>
+
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="chip">Concierge</span>
             <span className="chip">Miami Music Week</span>

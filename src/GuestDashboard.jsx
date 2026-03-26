@@ -186,6 +186,15 @@ export default function GuestDashboard({ guest }) {
             Ultra Set Times
           </div>
 
+          <a
+            href="https://drive.google.com/drive/folders/1Bx0caDmZuQ1yjOh8o3XXhJz9RWlI42CU?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="card-interactive flex h-36 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
+          >
+            Share Your Pictures
+          </a>
+
           <div
             className="card-interactive col-span-full flex h-28 cursor-pointer items-center justify-center text-center text-lg font-semibold text-white"
             onClick={() => window.location.href = `sms:+17864174744?body=${encodeURIComponent(`${guest.name} - Unit ${guest.unit}: `)}`}

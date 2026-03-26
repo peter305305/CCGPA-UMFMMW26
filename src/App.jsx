@@ -84,18 +84,21 @@ function Landing({ setUser, setIsAdmin }) {
               className="w-full h-auto block"
             />
           </div>
-          <p className="text-sm font-medium text-champagne-400/80">Staying at the Bentley Bay?</p>
-          <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-stretch">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-              placeholder="Enter your first name"
-              className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-3.5 text-base text-white placeholder:text-champagne-400/50 focus:border-gold-500/50 focus:outline-none focus:ring-2 focus:ring-gold-500/30"
-            />
-            <button className="cta-button w-full sm:w-auto" onClick={handleLogin} disabled={searching}>
-              {searching ? 'Searching…' : 'Enter'}
-            </button>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gold-400">Staying at the Bentley Bay?</p>
+            <p className="mb-4 text-sm text-champagne-400/60">Enter your first name to access your guest portal.</p>
+            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-stretch">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                placeholder="First name"
+                className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-3.5 text-base text-white placeholder:text-champagne-400/50 focus:border-gold-500/50 focus:outline-none focus:ring-2 focus:ring-gold-500/30"
+              />
+              <button className="cta-button w-full sm:w-auto" onClick={handleLogin} disabled={searching}>
+                {searching ? 'Searching…' : 'Enter'}
+              </button>
+            </div>
           </div>
 
           {error && (

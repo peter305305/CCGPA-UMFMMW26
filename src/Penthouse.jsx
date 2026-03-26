@@ -28,18 +28,18 @@ export default function Penthouse({ guest }) {
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">6:00 PM – 4:00 AM</p>
+                <p className="font-semibold text-white">6:00 PM – 12:00 AM</p>
                 <p>Main event</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">12:00 AM</p>
-                <p>Party goes inside</p>
+                <p className="font-semibold text-white">8:00 PM – 10:00 PM</p>
+                <p>Dinner service</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">4:00 AM</p>
-                <p>Event ends</p>
+                <p className="font-semibold text-white">12:00 AM – 4:00 AM</p>
+                <p>After party</p>
               </div>
             </div>
           </div>

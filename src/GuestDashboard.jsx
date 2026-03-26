@@ -66,28 +66,31 @@ export default function GuestDashboard({ guest }) {
             </div>
           </div>
 
-          {/* HIDDEN — bring back later this week
           <div className="card p-6">
             <p className="card-header">Today's Itinerary</p>
-            <h2 className="card-title">Signature moments</h2>
+            <h2 className="card-title">Thursday, March 26</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
-                <p className="font-semibold text-white">3:00 PM</p>
-                <p>Party bus departure</p>
+                <p className="font-semibold text-white">6:00 PM</p>
+                <p>Doors open – Sunset Session</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">10:00 AM – 1:00 PM</p>
-                <p>Brunch in residence</p>
+                <p className="font-semibold text-white">6:00 PM – 12:00 AM</p>
+                <p>Main event</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">1:00 AM – 3:00 AM</p>
-                <p>Late-night bites</p>
+                <p className="font-semibold text-white">8:00 PM – 10:00 PM</p>
+                <p>Dinner service</p>
+              </div>
+              <div className="lux-divider" />
+              <div>
+                <p className="font-semibold text-white">12:00 AM – 4:00 AM</p>
+                <p>After party</p>
               </div>
             </div>
           </div>
-          */}
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">

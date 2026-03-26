@@ -65,13 +65,75 @@ export default function Penthouse({ guest }) {
             </div>
           </div>
 
-          <div className="card p-6 border-ultraPink-500/20">
+          <div className="card col-span-full p-6 border-ultraPink-500/20">
             <p className="card-header text-ultraPink-400">Food & Drink</p>
             <h2 className="card-title">Menu</h2>
             <div className="mt-4 text-sm text-champagne-400/80">
-              <p className="font-semibold text-white">Open bar & passed bites</p>
+              <p className="font-semibold text-white">Open bar</p>
               <p className="mt-1">Premium spirits · Signature cocktails</p>
-              <p className="mt-1">Chef-curated hors d'oeuvres</p>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Charcuterie</p>
+                <p className="mt-1 text-sm text-champagne-400/80">Curated charcuterie bar</p>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Hors d'Oeuvres</p>
+                <ul className="mt-1 space-y-1 text-sm text-champagne-400/80">
+                  <li><span className="text-white">Wagyu Crispy Rice</span> · ponzu gel, micro herbs</li>
+                  <li><span className="text-white">Avocado Tartare</span> · cucumber rounds, tajín, gold flakes</li>
+                  <li><span className="text-white">Cheeseburger Slider</span> · cheddar, pickled onion, pickle skewer</li>
+                  <li><span className="text-white">Pigs in a Blanket</span> · golden puff pastry</li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Entrées</p>
+                <ul className="mt-1 space-y-1 text-sm text-champagne-400/80">
+                  <li><span className="text-white">Sirloin</span> · herb chimichurri</li>
+                  <li><span className="text-white">Herb Chicken</span> · creamy sauce, fresh herbs</li>
+                  <li><span className="text-white">Stuffed Bell Peppers</span> · quinoa, black beans, plant-based cheese</li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Salads</p>
+                <ul className="mt-1 space-y-1 text-sm text-champagne-400/80">
+                  <li><span className="text-white">Summer Salad</span> · watermelon, feta, mint, lemon dressing</li>
+                  <li><span className="text-white">Caesar Salad</span> · Parmigiano crisps, sourdough croutons</li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Sides</p>
+                <ul className="mt-1 space-y-1 text-sm text-champagne-400/80">
+                  <li><span className="text-white">Roasted Vegetables</span> · zucchini, squash, peppers, broccoli</li>
+                  <li><span className="text-white">Cheddar Mashed Potatoes</span> · butter, chives</li>
+                  <li><span className="text-white">Penne al Vodka</span> · tomato cream sauce, basil</li>
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Bread & Butter</p>
+                <p className="mt-1 text-sm text-champagne-400/80">
+                  Sourdough, baguette, ciabatta, multigrain · Compound butters: herb, honey-cinnamon, everything bagel, olive-lemon-za'atar, sun-dried tomato
+                </p>
+              </div>
+
+              <div className="sm:col-span-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-ultraPink-400">Desserts <span className="normal-case text-champagne-400/60">· passed shooters</span></p>
+                <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-sm text-champagne-400/80">
+                  <span>Chocolate Mousse</span><span>·</span>
+                  <span>Key Lime Pie</span><span>·</span>
+                  <span>Strawberry Shortcake</span><span>·</span>
+                  <span>Raspberry Panna Cotta</span><span>·</span>
+                  <span>Passionfruit Cheesecake</span><span>·</span>
+                  <span>Tiramisu</span><span>·</span>
+                  <span>Dubai Style Chocolate</span>
+                </div>
+              </div>
             </div>
           </div>
 

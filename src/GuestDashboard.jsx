@@ -66,23 +66,23 @@ export default function GuestDashboard({ guest }) {
             </div>
           </div>
 
-          <div className="card-interactive cursor-pointer p-6" onClick={() => navigate('/penthouse')}>
+          <div className="card-interactive cursor-pointer p-6" onClick={() => navigate('/set-times')}>
             <p className="card-header">Today's Itinerary</p>
-            <h2 className="card-title">Thursday, March 26</h2>
+            <h2 className="card-title">Friday, March 27 — Ultra Day 1</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
-                <p className="font-semibold text-white">6:00 PM</p>
-                <p>Doors open – Sunset Session</p>
+                <p className="font-semibold text-white">10:00 AM – 2:00 PM</p>
+                <p>Brunch at the Penthouse</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">6:00 PM – 12:00 AM</p>
-                <p>Main event</p>
+                <p className="font-semibold text-gold-400">4:00 PM</p>
+                <p>Departure via party bus</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">8:00 PM – 10:00 PM</p>
-                <p>Dinner service</p>
+                <p className="font-semibold text-white">5:00 PM – 12:00 AM</p>
+                <p>Ultra Music Festival — Day 1</p>
               </div>
               <div className="lux-divider" />
               <div>
@@ -90,7 +90,7 @@ export default function GuestDashboard({ guest }) {
                 <p>After party</p>
               </div>
             </div>
-            <p className="mt-4 text-sm font-medium text-gold-400">Click here for more info</p>
+            <p className="mt-4 text-sm font-medium text-gold-400">View set times →</p>
           </div>
         </div>
 

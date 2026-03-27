@@ -71,23 +71,28 @@ export default function GuestDashboard({ guest }) {
             <h2 className="card-title">Friday, March 27 — Ultra Day 1</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
-                <p className="font-semibold text-white">10:00 AM – 2:00 PM</p>
-                <p>Brunch at the Penthouse</p>
+                <p className="font-semibold text-gold-400">7:00 PM</p>
+                <p>Departure</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-gold-400">4:00 PM</p>
-                <p>Departure via party bus</p>
+                <p className="font-semibold text-white">8:00 PM</p>
+                <p>Bzrp</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">5:00 PM – 12:00 AM</p>
-                <p>Ultra Music Festival — Day 1</p>
+                <p className="font-semibold text-white">9:20 PM</p>
+                <p>Alesso B2B Martin Garrix</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">12:00 AM – 4:00 AM</p>
-                <p>After party</p>
+                <p className="font-semibold text-white">10:45 PM</p>
+                <p>Major Lazer</p>
+              </div>
+              <div className="lux-divider" />
+              <div>
+                <p className="font-semibold text-white">12:00 AM</p>
+                <p>Festival ends</p>
               </div>
             </div>
             <p className="mt-4 text-sm font-medium text-gold-400">View set times →</p>

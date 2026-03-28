@@ -68,31 +68,31 @@ export default function GuestDashboard({ guest }) {
 
           <div className="card-interactive cursor-pointer p-6" onClick={() => navigate('/set-times')}>
             <p className="card-header">Today's Itinerary</p>
-            <h2 className="card-title">Friday, March 27 — Ultra Day 1</h2>
+            <h2 className="card-title">Saturday, March 28 — Ultra Day 2</h2>
             <div className="mt-4 space-y-3 text-sm text-champagne-400/80">
               <div>
-                <p className="font-semibold text-gold-400">7:00 PM</p>
+                <p className="font-semibold text-gold-400">6:45 PM</p>
                 <p>Departure</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">8:00 PM</p>
-                <p>Bzrp</p>
+                <p className="font-semibold text-white">7:25 PM</p>
+                <p>Excision</p>
               </div>
               <div className="lux-divider" />
               <div>
-                <p className="font-semibold text-white">9:20 PM</p>
-                <p>Alesso B2B Martin Garrix</p>
+                <p className="font-semibold text-white">8:30 PM</p>
+                <p>Hardwell</p>
+              </div>
+              <div className="lux-divider" />
+              <div>
+                <p className="font-semibold text-white">9:35 PM</p>
+                <p>Armin van Buuren</p>
               </div>
               <div className="lux-divider" />
               <div>
                 <p className="font-semibold text-white">10:45 PM</p>
-                <p>Major Lazer</p>
-              </div>
-              <div className="lux-divider" />
-              <div>
-                <p className="font-semibold text-white">12:00 AM</p>
-                <p>Festival ends</p>
+                <p>Sebastian Ingrosso B2B Steve Angello</p>
               </div>
             </div>
             <p className="mt-4 text-sm font-medium text-gold-400">View set times →</p>

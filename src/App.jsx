@@ -67,14 +67,13 @@ function Landing({ setUser, setIsAdmin }) {
         <div className="flex flex-col gap-8 text-center">
           <div className="mx-auto lux-pill flex items-center gap-2">
             Ultra Miami Residence
-            <span className="h-1.5 w-1.5 rounded-full bg-gold-400 animate-pulse" aria-hidden />
           </div>
           <div>
             <h1 className="font-display text-3xl font-medium tracking-tight text-white sm:text-5xl" style={{ letterSpacing: '-0.02em' }}>
-              Welcome Suite
+              Thank You
             </h1>
             <p className="page-subtitle mt-3">
-              Your private concierge hub for Miami Music Week and Ultra.
+              Miami Music Week 2026 has come to a close.
             </p>
           </div>
           <div className="overflow-hidden rounded-2xl border border-white/10 shadow-luxe-card">
@@ -84,44 +83,11 @@ function Landing({ setUser, setIsAdmin }) {
               className="w-full h-auto block"
             />
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-gold-400">Staying at the Bentley Bay?</p>
-            <p className="mb-4 text-sm text-champagne-400/60">Enter your first name to access your guest portal.</p>
-            <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-stretch">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-                placeholder="First name"
-                className="w-full rounded-2xl border border-white/15 bg-white/5 px-5 py-3.5 text-base text-white placeholder:text-champagne-400/50 focus:border-gold-500/50 focus:outline-none focus:ring-2 focus:ring-gold-500/30"
-              />
-              <button className="cta-button w-full sm:w-auto" onClick={handleLogin} disabled={searching}>
-                {searching ? 'Searching…' : 'Enter'}
-              </button>
-            </div>
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+            <p className="text-sm text-champagne-400/80 leading-relaxed">
+              Thank you for an incredible weekend at the Bentley Bay. We hope you had the time of your life at Ultra and throughout Miami Music Week. Until next year.
+            </p>
           </div>
-
-          {error && (
-            <p className="text-sm text-champagne-400/80">{error}</p>
-          )}
-
-          {matches.length > 1 && (
-            <div className="text-left space-y-3">
-              <p className="text-sm text-champagne-400/80 text-center">Multiple guests found. Please select:</p>
-              {matches.map((g) => (
-                <button
-                  key={g.id}
-                  onClick={() => selectGuest(g)}
-                  className="card-interactive w-full cursor-pointer p-4 text-left"
-                >
-                  <p className="font-semibold text-white">{g.name}</p>
-                  <p className="text-sm text-champagne-400/80">
-                    {[g.building && `Building ${g.building}`, g.unit && `Unit ${g.unit}`].filter(Boolean).join(' · ') || 'No unit info'}
-                  </p>
-                </button>
-              ))}
-            </div>
-          )}
 
           <div
             className="card-interactive flex cursor-pointer items-center justify-center rounded-2xl p-5 text-center"
@@ -135,7 +101,6 @@ function Landing({ setUser, setIsAdmin }) {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <span className="chip">Concierge</span>
             <span className="chip">Miami Music Week</span>
             <span className="chip">Ultra 2026</span>
           </div>
@@ -153,14 +118,9 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing setUser={setUser} setIsAdmin={setIsAdmin} />} />
-        <Route path="/dashboard" element={<GuestDashboard guest={user} />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/weather" element={<Weather />} />
-        <Route path="/house-info" element={<HouseInfo />} />
-        <Route path="/set-times" element={<SetTimes />} />
-        <Route path="/penthouse" element={<Penthouse guest={user} />} />
         <Route path="/photos" element={<PhotoUpload guest={user} />} />
-        {/* <Route path="/dining" element={<Dining guest={user} />} /> */}{/* HIDDEN — bring back later this week */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="*" element={<Landing setUser={setUser} setIsAdmin={setIsAdmin} />} />
       </Routes>
     </Router>
   );
